@@ -7,7 +7,7 @@ Unity(C#)製です。
 	* https://github.com/Looking-Glass/JoyconLib
 * **Space Shuttle**(by Amint3D, from Unity Asset Store):プレイヤー機のモデルとして使用。
 	* https://assetstore.unity.com/packages/3d/vehicles/space/space-shuttle-34972
-* **UFO Battleship** (by FlexUnit, from Unity Asset Store): 敵機のモデルとして使用。
+* **UFO Battleship**(by FlexUnit, from Unity Asset Store): 敵機のモデルとして使用。
 	* https://assetstore.unity.com/packages/3d/vehicles/space/ufo-battleship-289193
 * **BGM・SE:** DOVA-SYNDROME様より
 	* タイトルBGM:BGM - 102 - Universe(by Sound Of Incense)
