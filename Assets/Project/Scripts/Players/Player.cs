@@ -1,10 +1,13 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Playerの制御を管理
+/// </summary>
 public class Player:PersistentSingleton<Player>{
     [Header("ステータス")]
-    [SerializeField]int _hp=10;
-    [SerializeField]Vector3 _pos=new Vector3(0f,0f,0f);
+    [SerializeField]int _maxHP=10;
+    [SerializeField]Vector3 _initPos=new Vector3(0f,0f,0f);
     
     //移動範囲の制限
     [SerializeField]float _minMovementRangeX=-10;
@@ -26,25 +29,35 @@ public class Player:PersistentSingleton<Player>{
     [SerializeField]GameObject _beam;//ビーム
     [SerializeField]float _beamOffsetZ=1f;//どれだけプレイヤの前で生成するか
 
+    //---インスタンス---
+    GameManager _gameManager;
+
     Rigidbody _rb;
+
+    int _hp;
+    bool _canAttack=true;//攻撃できるか
+
+    Vector3 _pos;
     Vector3 _moveVector;//Playerの移動ベクトル
     Vector3 _beamPos;//ビームを生成する座標
 
-    bool _canAttack=true;//攻撃できるか
-    
     protected override void Awake(){
         base.Awake();
         
         _rb = GetComponent<Rigidbody>();
     }
 
-    public void Start(){
-        transform.position = _pos;
+    void Start() {
+        SetIns();
+        Init();
     }
 
+
     void Update(){
+        if(_gameManager.isGameOver) return;//GemeOverならリターン
+
 #if UNITY_EDITOR
-        if (GameManager.Ins.useDebugInput)DebugAttack();
+        if (_gameManager.useDebugInput)DebugAttack();
         else Attack();
 #else
         Attack();
@@ -52,12 +65,36 @@ public class Player:PersistentSingleton<Player>{
     }
 
     void FixedUpdate(){
+        //GameOverのときリターン
+        if(_gameManager.isGameOver) {
+            //動きを止める
+            _rb.linearVelocity = Vector3.zero;
+            return;
+        }
+
 #if UNITY_EDITOR
-        if (GameManager.Ins.useDebugInput)DebugMove();
+        if (_gameManager.useDebugInput)DebugMove();
         else Move();
 #else
         Move();
 #endif
+    }
+
+    /// <summary>
+    /// 初期化
+    /// </summary>
+    public void Init() {
+        _pos=_initPos;
+        transform.position=_pos;
+
+        _hp=_maxHP;
+    }
+
+    /// <summary>
+    /// インスタンスのセット
+    /// </summary>
+    void SetIns() {
+        _gameManager=GameManager.Ins;
     }
 
     /// <summary>

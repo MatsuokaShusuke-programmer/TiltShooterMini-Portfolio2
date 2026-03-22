@@ -1664,8 +1664,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 007eb642aa022bb408c68e9f3515a7ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 30
-  _pos: {x: 0, y: 0, z: 0}
+  _maxHP: 10
+  _initPos: {x: 0, y: 0, z: 0}
   _minMovementRangeX: -11
   _maxMovementRangeX: 11
   _minMovementRangeY: -3

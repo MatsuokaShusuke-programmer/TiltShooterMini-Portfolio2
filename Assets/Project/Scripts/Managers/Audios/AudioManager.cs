@@ -22,7 +22,7 @@ public class AudioManager:PersistentSingleton<AudioManager>{
     public int explosionSEIndex=1;  //爆破音
     public int hitSEIndex=2;        //ヒット音
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // Init is called once before the first execution of Update after the MonoBehaviour is created
     void Start(){
         //現在のシーンによってBGMを再生
         switch(MySceneManager.Ins.CurrentSceneType){

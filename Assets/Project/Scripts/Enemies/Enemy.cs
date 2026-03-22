@@ -11,6 +11,9 @@ public class Enemy:MonoBehaviour{
     [SerializeField]float _addPos=1f;//ビームをどれだけ前に出すか
 
     [SerializeField]float _maxDistance=50f;//レイを飛ばす距離
+
+    //---インスタンス---
+    GameManager _gameManager;
     
     float _checkRadius=1f;//レイの半径
 
@@ -21,7 +24,20 @@ public class Enemy:MonoBehaviour{
 
     Quaternion _beamRot;//ビームの角度
 
-    void Start(){
+    void Start() {
+        SetIns();
+        SetupBeamLaunchSettings();
+    }
+
+    void Update(){
+        //攻撃可能かつGameOverでないとき、攻撃
+        if(_canAttack&&!_gameManager.isGameOver)Attack();
+    }
+
+     /// <summary>
+     /// ビーム発射設定のセットアップ
+     /// </summary>
+     void SetupBeamLaunchSettings() {
         //ビームのスポーン場所を敵の前にする
         _beamPos=transform.position;
         _beamPos.z-=_addPos;
@@ -31,8 +47,11 @@ public class Enemy:MonoBehaviour{
         _checkRadius=_beam.GetComponent<Collider>().bounds.extents.x;
     }
 
-    void Update(){
-        if(_canAttack)Attack();//攻撃可能なら攻撃
+    /// <summary>
+    /// インスタンスのセット
+    /// </summary>
+    void SetIns() {
+        _gameManager=GameManager.Ins;
     }
 
     void OnTriggerEnter(Collider other){

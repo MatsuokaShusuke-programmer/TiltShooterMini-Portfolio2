@@ -14,7 +14,7 @@ public class Beam:MonoBehaviour{
         rb=GetComponent<Rigidbody>();
     }
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // Init is called once before the first execution of Update after the MonoBehaviour is created
     void Start(){
         StartCoroutine(Destroy());
         rb.linearVelocity=transform.forward*_speed;//前に飛ぶ

@@ -87,7 +87,8 @@ public class GameManager:PersistentSingleton<GameManager>{
         gameOverScoreText.text=scoreManager.Score.ToString();
         
         //コンティニューボタンに関数を割り当てる
-        continueButton.onClick.AddListener(UIManager.Ins.OnClickContinueButton);
+        continueButton.onClick.
+            AddListener(UIManager.Ins.OnClickContinueButton);
         //QuitButtonに関数を割り当てる
         quitButton.onClick.AddListener(UIManager.Ins.OnClickQuitButton);
     }

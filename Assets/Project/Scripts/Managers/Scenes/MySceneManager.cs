@@ -35,7 +35,7 @@ public class MySceneManager:PersistentSingleton<MySceneManager>{
     /// </summary>
     public void Continue(){
         SceneManager.LoadScene(gameSceneName);
-        Player.Ins.Start();//プレイヤの初期化
+        Player.Ins.Init();//プレイヤの初期化
         GameManager.Ins.isGameOver=false;
         Debugger.Log("isGameOver"+GameManager.Ins.isGameOver);
     }
